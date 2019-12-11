@@ -4,19 +4,21 @@
       border-variant="secondary"
       header="دانشگاه شهید رجایی"
       header-border-variant="secondary"
+      header-bg-variant="primary"
+      header-text-variant="white"
       align="center"
       class="col-10 pr-0 pl-0 m-3"
     >
       <b-card-text class="card-text">
 
-        <b-col md="4" class="float-right text-right p-1 border-left"><h5>انتخابات دانشکده کامپیوتر</h5></b-col>
-        <b-col md="8" class="float-left pr-3 text-right">
-          <div class="vote-info col-4">
+        <b-col class="col-md-4 col-sm-12 float-right text-right p-1 border-left"><h5>انتخابات دانشکده کامپیوتر</h5></b-col>
+        <b-col class="col-md-8 col-sm-12 float-left pr-3 text-right">
+          <div class="vote-info col-md-4 col-sm-12">
             <p> تعداد رای مجاز: {{limit}}</p>
             <p> تعداد رای باقیمانده: {{ remain}}</p>
           </div>
-          <div class="votes-info col-8">
-            <p class="col-5">انتخاب های شما:</p>
+          <div class="votes-info col-md-8 col-sm-12">
+            <p class="col-md-5 col-sm-12">انتخاب های شما:</p>
             <div class="votes">
               <b-badge v-for="vote in votes" :key="vote.id" variant="secondary">{{vote.student.name}}</b-badge>
             </div>

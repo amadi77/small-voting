@@ -1,14 +1,20 @@
 <template>
   <div class="container">
     <!--      <b-col offset="3" md="3" sm="6">-->
+
     <b-col md="6" sm="12" class="info-box card-border">
       <!--        <b-form @submit="onSubmit" @reset="onReset">-->
       <div class="col-12 float-left">
         <img src="../static/icon.gif" width="130px">
         <br/><br/>
         <h3>سامانه رای گیری دانشکده کامپیوتر</h3>
-
+        <div class="col-12">
+          <b-alert v-model="showError" variant="danger" dismissible>
+            {{errorMassage}}
+          </b-alert>
+        </div>
       </div>
+
       <b-form class="col-12 float-left mt-3" @submit="onSubmit">
         <b-form-group id="userStudentId-group" label="شماره دانشجویی" dir="rtl">
           <b-form-input
@@ -51,9 +57,6 @@
     // import numeric from "vuelidate/src/validators/numeric"
 
     export default {
-        components: {
-            Logo
-        },
         mixins: [validationMixin],
         data() {
             return {
@@ -67,7 +70,9 @@
                     type: null,
                     inputYear: 0,
                     grade: null,
-                }
+                },
+                showError: false,
+                errorMassage: ''
             }
         },
         validations: {
@@ -93,6 +98,7 @@
                                 // this.$store.commit('setStudentId', this.form.studentId)
                                 // this.$store.commit('setSelectionId', response.data)
                                 console.log("response guest: ", response)
+                            if (response.data.length > 0) {
                                 this.$store.commit('setAll', {
                                     studentId: this.form.studentId,
                                     selections: response.data,
@@ -103,32 +109,49 @@
                                 this.$router.push({
                                     path: '/selection'
                                 })
+                            }else {
+                                this.showError = true
+                                this.errorMassage = 'شما قبلا رای داده اید و نمیتوانید مجددا وارد شوید!'
+                            }
                             }
                         )
-                        .catch(er => console.log("guest error : ", er))
+                        .catch(er => {
+                            console.log("guest error : ", er)
+                            this.showError = true
+                            this.errorMassage = 'دانشجویی با شماره دانشجویی وارد شده به عنوان دانشجوی مهمان پیدا نشد!'
+                        })
                 } else if (this.form.type = 'host') {
                     this.$axios.get('/rest/selections/student/' + this.form.studentId)
                         .then(response => {
-                                console.log("response host 1 ")
-                                // this.$store.commit('setSelectionId', response.data)
-                                this.$store.commit('setAll',
-                                    {
-                                        studentId: this.form.studentId,
-                                        selections: response.data,
-                                        grade: null,
-                                        inputYear: null,
-                                        host: true
+                                console.log("response host 1 ", response)
+                                if (response.data.length > 0) {
+                                    // this.$store.commit('setSelectionId', response.data)
+                                    this.$store.commit('setAll',
+                                        {
+                                            studentId: this.form.studentId,
+                                            selections: response.data,
+                                            grade: null,
+                                            inputYear: null,
+                                            host: true
+                                        })
+
+                                    console.log("response host 2 ")
+                                    this.$router.push({
+                                        path: '/selection'
                                     })
+                                    console.log("response host 3 ")
 
-                            console.log("response host 2 ")
-                                this.$router.push({
-                                    path: '/selection'
-                                })
-                            console.log("response host 3 ")
-
+                                } else {
+                                    this.showError = true
+                                    this.errorMassage = 'شما قبلا رای داده اید و نمیتوانید مجددا وارد شوید!'
+                                }
                             }
                         )
-                        .catch(er => console.log("host error : ", er))
+                        .catch(er => {
+                            console.log("host error : ", er)
+                            this.showError = true
+                            this.errorMassage = 'دانشجویی با شماره دانشجویی وارد شده به عنوان دانشجوی اصلی پیدا نشد!'
+                        })
                 }
                 // this.vuex.studentId = this.form.studentId
                 this.isLoading = false

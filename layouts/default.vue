@@ -2,15 +2,15 @@
   <div>
     <b-navbar variant="faded" type="light">
       <b-navbar-brand tag="h1" to="/" class="mb-0">
-        <!--        <img src="../static/icon.gif" width="50px">-->
-        <!--        دانشگاه شهید رجایی-->
+                <img src="../static/icon.gif" width="50px">
+                دانشگاه شهید رجایی
       </b-navbar-brand>
-      <b-navbar-nav>
+    <!--  <b-navbar-nav>
         <b-nav-item to="/">home</b-nav-item>
         <b-nav-item to="/admin" v-if="!student">admin</b-nav-item>
         <b-nav-item to="/selection" v-if="enter">selection</b-nav-item>
         <b-nav-item to="/file">file</b-nav-item>
-      </b-navbar-nav>
+      </b-navbar-nav>-->
     </b-navbar>
 
     <nuxt/>
@@ -47,7 +47,7 @@
   }
 
   body {
-    background-color: #e0dfdf;
+    /*background-color: #e0dfdf;*/
   }
   .card:hover ,.card:active,.card:visited{
     transition: all 0.6s cubic-bezier(0.25, 0.1, 0.05, 1.13);

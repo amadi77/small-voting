@@ -179,6 +179,10 @@
                     this.checkLimit = true;
                     this.checkLimitMessage = "ابتدا یک کاندید انتخاب کنید سپس ارسال را بزنید!"
                 }
+                if (this.votes.length > this.limit) {
+                    this.checkLimit = true;
+                    this.checkLimitMessage = "تعداد رای ها از حد مجاز بیشتر است!"
+                }
                 let payload = {};
                 let url = '/rest/vote/list/host/'
                 if (!this.$store.state.isHost) {

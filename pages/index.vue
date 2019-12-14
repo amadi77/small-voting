@@ -166,6 +166,16 @@
                 this.$store.commit('resetStudentId')
                 this.$store.commit('resetSelectionId')
             })
+        },
+        created() {
+            this.$store.commit('setAll', {
+                studentId: null,
+                selections: [],
+                grade: null,
+                inputYear: null,
+                host: true
+            })
+            // this.$store.commit('resetAll')
         }
     }
 </script>

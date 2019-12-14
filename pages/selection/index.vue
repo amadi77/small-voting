@@ -98,7 +98,7 @@
                     }
                 }).then(response => {
                 let outPut = {};
-                console.log("selection page2 ",response)
+                console.log("selection page3 ",response)
                 outPut.limit = response.data[0].selection.limit;
                 outPut.listCandidate = response.data;
                 return outPut
@@ -210,6 +210,7 @@
                     if (response.data) {
                         this.showDismissibleAlert = true
                         this.showAlert()
+                        this.$store.commit('resetAll')
                         setTimeout(() => {
                             this.$router.push('/')
                         }, 5000)

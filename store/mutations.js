@@ -29,7 +29,7 @@ const mutations = {
     state.inputYear = null;
     state.grade = null;
     state.studentId = null;
-    state.selectionId = null
+    state.selectionId = null;
   },
   setAll(state, payload) {
 
